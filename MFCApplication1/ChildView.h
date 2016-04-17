@@ -1,10 +1,11 @@
 #pragma once
-#include "My2DObjectB11.h"
-#include <vector>
+#include "MyModel.h"
 // CChildView window
 
 class CChildView : public CWnd
 {
+    MyModel *model;
+
 // Construction
 public:
 	CChildView();
@@ -18,13 +19,9 @@ public:
 // Overrides
 	protected:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-    std::vector<CMy2DObjectB11 *> m_Objects;
+    
     int m_nCatched;
     CPoint m_MousePos;
-
-    // if the point is inside of a figure,
-    // the function will return its number, otherwise -1
-    int FindObject(CPoint point);
 
 // Implementation
 public:

@@ -42,6 +42,9 @@
     <ClInclude Include="My2DObjectB11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCApplication1.cpp">
@@ -60,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="My2DObjectB11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
