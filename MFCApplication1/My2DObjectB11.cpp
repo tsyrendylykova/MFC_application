@@ -157,12 +157,6 @@ void CMy2DObjectB11::Draw(CDC &dc) {
     dc.LineTo(this->m_center.GetX() + newArray[9][0], this->m_center.GetY() + newArray[9][1]);
     dc.LineTo(this->m_center.GetX() + newArray[10][0],this->m_center.GetY() + newArray[10][1]);
     dc.LineTo(this->m_center.GetX() + newArray[0][0], this->m_center.GetY() + newArray[0][1]);
-
-    // построение координатной сетки
-    dc.MoveTo(0, x0y0.GetY());
-    dc.LineTo(500, x0y0.GetY());
-    dc.MoveTo(x0y0.GetX(), 0);
-    dc.LineTo(x0y0.GetX(), 500);
 }
 
 

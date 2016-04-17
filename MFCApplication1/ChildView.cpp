@@ -74,16 +74,18 @@ void CChildView::OnLButtonUp(UINT nFlags, CPoint point)
 
 void CChildView::OnMouseMove(UINT nFlags, CPoint point)
 {
-    //if (m_nCatched >= 0) {
-    //    CRect rect;
-    //    GetClientRect(&rect);
-    //    point.x = min(rect.right, max(rect.left, point.x));
-    //    point.y = min(rect.bottom, max(rect.top, point.y));
-    //    CPoint Delta = point - m_MousePos;
-    //    m_Objects[m_nCatched]->Move(Delta.x, Delta.y);
-    //    m_MousePos = point;
-    //    Invalidate();  // redraw content
-    //}
+    if (m_nCatched >= 0) {
+        CRect rect;
+        GetClientRect(&rect);
+        point.x = min(rect.right, max(rect.left, point.x));
+        point.y = min(rect.bottom, max(rect.top, point.y));
+        
+        CPoint delta = point - m_MousePos;
+
+        this->model->MoveFigure(m_nCatched, delta.x, delta.y);
+        m_MousePos = point;
+        Invalidate();  // redraw content
+    }
     CWnd::OnMouseMove(nFlags, point);
 }
 
