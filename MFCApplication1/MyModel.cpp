@@ -26,7 +26,7 @@ void MyModel::Draw(CDC &dc)
 
 void MyModel::AddFigure(int max_x, int max_y)
 {
-    this->m_Objects.push_back(new CMy2DObjectB11(rand() % max_x, rand() % max_y, 60, 30, 20, 10, M_PI/4));
+    this->m_Objects.push_back(new CMy2DObjectB11(rand() % max_x, rand() % max_y, 120, 60, 40, 20, M_PI / 4));
 }
 
 int MyModel::FindObject(double x, double y) {
@@ -42,4 +42,11 @@ int MyModel::FindObject(double x, double y) {
 
 void MyModel::MoveFigure(int figure_index, double dX, double dY) {
     this->m_Objects[figure_index]->Move(dX, dY);
+}
+
+void MyModel::Draw_buff(CDC &dcMem) {
+
+    for (int i = 0; i < m_Objects.size(); i++) {
+        m_Objects[i]->Draw(dcMem);
+    }
 }

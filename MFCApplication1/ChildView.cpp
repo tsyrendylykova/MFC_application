@@ -25,6 +25,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_WM_LBUTTONUP()
     ON_WM_MOUSEMOVE()
     ON_COMMAND(ID_BUTTON32771, OnNewFigure)
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -48,6 +49,23 @@ void CChildView::OnPaint() {
     CPaintDC dc(this);
 
     this->model->Draw(dc);
+
+    CDC dcMem;
+    dcMem.CreateCompatibleDC(&dc);
+
+    CRect rect;
+    GetClientRect(&rect);
+
+    CBitmap bmp;
+    bmp.CreateCompatibleBitmap(&dc, rect.Width(), rect.Height());
+    CBitmap *pOldBmp = dcMem.SelectObject(&bmp);
+    dcMem.FillSolidRect(0, 0, rect.Width(), rect.Height(), 0xFFFFFF);
+
+    this->model->Draw_buff(dcMem);
+
+    dc.BitBlt(0, 0, rect.Width(), rect.Height(), &dcMem, 0, 0, SRCCOPY);
+    dcMem.SelectObject(pOldBmp);
+	
 }
 
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
@@ -96,4 +114,10 @@ void CChildView::OnNewFigure() {
     this->model->AddFigure(rect.Width(), rect.Height());
     
     Invalidate();
+}
+
+BOOL CChildView::OnEraseBkgnd(CDC* pDC){
+	// Do not call base class implementation
+	// return CWnd::OnEraseBkgnd(pDC);
+	return true;
 }

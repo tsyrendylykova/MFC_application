@@ -47,7 +47,12 @@ class CMy2DObjectB11 {
     }
 
 public:
-    CMy2DObjectB11() : CMy2DObjectB11(0, 0, 0, 0, 0, 0, 0) {
+    CMy2DObjectB11() : m_center(0, 0) {
+		this->A = 0;
+        this->A1 = 0;
+        this->A2 = 0;
+        this->A3 = 0;
+        this->m_dAngle = 0;
     }
     CMy2DObjectB11(double centerX, double centerY, double A, double A1, double A2, double A3, double Angle) : m_center(centerX, centerY) {
         this->A = A;
@@ -58,7 +63,13 @@ public:
     };
 
     CMy2DObjectB11(const CMy2DPoint& center, double A, double A1, double A2, double A3, double Angle)
-        : CMy2DObjectB11(center.GetX(), center.GetY(), A, A1, A2, A3, Angle) {};
+        : m_center(center.GetX(), center.GetY()) {
+	    this->A = A;
+        this->A1 = A1;
+        this->A2 = A2;
+        this->A3 = A3;
+        this->m_dAngle = Angle;
+	};
 
     double GetA()  const;
     double GetA1() const;

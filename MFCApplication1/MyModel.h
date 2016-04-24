@@ -17,5 +17,7 @@ public:
     void AddFigure(int max_x, int max_y);
 
     void MoveFigure(int figure_index, double dX, double dY);
+
+    void Draw_buff(CDC &dc);
 };
 

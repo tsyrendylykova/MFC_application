@@ -48,14 +48,25 @@ bool CMy2DObjectB11::IsInside(const CMy2DPoint& point) {
     return this->IsInside(point.GetX(), point.GetY());
 };
 bool CMy2DObjectB11::IsInside(double x, double y) {
-    double new_x, new_y;
+    double new_x, new_y, tmp, new_x1, new_y1, new_x2, new_y2;
     // перенос
     x -= this->m_center.GetX();
     y -= this->m_center.GetY();
+    
     // поворот
-    new_x = x * cos(this->m_dAngle) + y * sin(this->m_dAngle);
-    new_y = -x * sin(this->m_dAngle) + y * cos(this->m_dAngle);
+    new_x1 = x * cos(this->m_dAngle) - y * sin(this->m_dAngle);
+    new_y1 = x * sin(this->m_dAngle) + y * cos(this->m_dAngle);
+    
+    // поворот на 90
+    new_x2 = new_x1 * cos(M_PI / 2) - new_y1 * sin(M_PI / 2);
+    new_y2 = new_x1 * sin(M_PI / 2) + new_y1 * cos(M_PI / 2);
 
+    // смена осей координат
+    tmp = new_x2;
+    new_x = new_y2;
+    new_y = tmp;
+      
+       
     // проверка на выход за границы фигуры по оси X
     if (new_x > (this->A / 2) || new_x < -(this->A / 2)) {
         return false;
