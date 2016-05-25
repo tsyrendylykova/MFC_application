@@ -52,11 +52,11 @@ bool CMy2DObjectB11::IsInside(double x, double y) {
     // перенос
     x -= this->m_center.GetX();
     y -= this->m_center.GetY();
-    
+
     // поворот
     new_x1 = x * cos(this->m_dAngle) - y * sin(this->m_dAngle);
     new_y1 = x * sin(this->m_dAngle) + y * cos(this->m_dAngle);
-    
+
     // поворот на 90
     new_x2 = new_x1 * cos(M_PI / 2) - new_y1 * sin(M_PI / 2);
     new_y2 = new_x1 * sin(M_PI / 2) + new_y1 * cos(M_PI / 2);
@@ -65,8 +65,8 @@ bool CMy2DObjectB11::IsInside(double x, double y) {
     tmp = new_x2;
     new_x = new_y2;
     new_y = tmp;
-      
-       
+
+
     // проверка на выход за границы фигуры по оси X
     if (new_x > (this->A / 2) || new_x < -(this->A / 2)) {
         return false;
@@ -117,29 +117,28 @@ bool CMy2DObjectB11::IsInside(double x, double y) {
 }
 
 void CMy2DObjectB11::Draw(CDC &dc) {
-    CMy2DPoint x0y0(200, 200);
 
     int myArray[10][2] = {
-    { this->A / 2,
-      -this->A / 2},
-    { -this->A / 2 + this->A2,
-      -this->A / 2},
-    { -this->A / 2,
-      -this->A / 2 + this->A2},
-    { -this->A / 2,
-      this->A / 2 - this->A3},
-    { -this->A / 2 + this->A3,
-      this->A / 2},
-    { this->A / 2,
-      this->A / 2},
-    { this->A / 2,
-      this->A / 2 - this->A1 / 2},
-    { this->A / 2 - this->A1,
-      this->A / 2 - this->A1 / 2},
-    { this->A / 2 - this->A1,
-      -this->A1 / 2},
-    { this->A / 2,
-      -this->A1 / 2}
+        { this->A / 2,
+        -this->A / 2 },
+        { -this->A / 2 + this->A2,
+        -this->A / 2 },
+        { -this->A / 2,
+        -this->A / 2 + this->A2 },
+        { -this->A / 2,
+        this->A / 2 - this->A3 },
+        { -this->A / 2 + this->A3,
+        this->A / 2 },
+        { this->A / 2,
+        this->A / 2 },
+        { this->A / 2,
+        this->A1 / 2 },
+        { this->A / 2 - this->A1,
+        this->A1 / 2 },
+        { this->A / 2 - this->A1,
+        -this->A1 / 2 },
+        { this->A / 2,
+        -this->A1 / 2 }
     };
     int newArray[10][2];
 
@@ -147,16 +146,16 @@ void CMy2DObjectB11::Draw(CDC &dc) {
     for (int i = 0; i <= 9; i++) {
         for (int j = 0; j <= 1; j++) {
             if (j == 0) {
-                newArray[i][j] = myArray[i][j] * cos(this->m_dAngle) + myArray[i][j + 1] *sin(this->m_dAngle);
+                newArray[i][j] = myArray[i][j] * cos(this->m_dAngle) + myArray[i][j + 1] * sin(this->m_dAngle);
             }
             else {
-                newArray[i][j] = -myArray[i][j-1] * sin(this->m_dAngle) + myArray[i][j] * cos(this->m_dAngle);
+                newArray[i][j] = -myArray[i][j - 1] * sin(this->m_dAngle) + myArray[i][j] * cos(this->m_dAngle);
             }
-        }    
+        }
     }
 
     dc.MoveTo(this->m_center.GetX() + newArray[0][0], this->m_center.GetY() + newArray[0][1]);
-                                                                              
+
     dc.LineTo(this->m_center.GetX() + newArray[1][0], this->m_center.GetY() + newArray[1][1]);
     dc.LineTo(this->m_center.GetX() + newArray[2][0], this->m_center.GetY() + newArray[2][1]);
     dc.LineTo(this->m_center.GetX() + newArray[3][0], this->m_center.GetY() + newArray[3][1]);
@@ -166,9 +165,6 @@ void CMy2DObjectB11::Draw(CDC &dc) {
     dc.LineTo(this->m_center.GetX() + newArray[7][0], this->m_center.GetY() + newArray[7][1]);
     dc.LineTo(this->m_center.GetX() + newArray[8][0], this->m_center.GetY() + newArray[8][1]);
     dc.LineTo(this->m_center.GetX() + newArray[9][0], this->m_center.GetY() + newArray[9][1]);
-    dc.LineTo(this->m_center.GetX() + newArray[10][0],this->m_center.GetY() + newArray[10][1]);
+    dc.LineTo(this->m_center.GetX() + newArray[10][0], this->m_center.GetY() + newArray[10][1]);
     dc.LineTo(this->m_center.GetX() + newArray[0][0], this->m_center.GetY() + newArray[0][1]);
 }
-
-
-
